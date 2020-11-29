@@ -4,6 +4,7 @@ START of gooseEscapeGamePlay.cpp
 #include <iostream>
 #include <cmath>
 #include <cstdlib>
+#include <fstream>
 using namespace std;
 #include <BearLibTerminal.h>
 #include "gooseEscapeUtil.hpp"
@@ -34,6 +35,34 @@ y direction
 */
 
 // print the game board function
+void printBoard(ifstream & fin, int gameBoard[NUM_BOARD_X][NUM_BOARD_Y])
+{
+	int mapTile = 0;
+	for(int row = 0; row < NUM_SCREEN_X; row++)
+	{
+		for(int col = 0; col < NUM_SCREEN_Y; col++)
+		{
+			fin >> mapTile;
+			if(mapTile = 1)
+			{
+				gameBoard[row][col] = SHALL_NOT_PASS;
+				terminal_put(row, col, WALL_CHAR);
+			}	
+		}
+	}
+	
+	int randX = 0, randY = 0;
+	do
+	{
+		randX = rand() % NUM_BOARD_X;
+        randY = rand() % NUM_BOARD_Y;
+	}
+	while(gameBoard[randX][randY] != 0);
+	
+	gameBoard[randX][randY] = WINNER;
+	terminal_put(randX,randY, WIN_CHAR);
+}
+/*
 void printBoard(int startWall, int HALF_NUM_COL, int gameBoard[NUM_BOARD_X][NUM_BOARD_Y])
 { 
     for(startWall; startWall < HALF_NUM_COL; startWall++)
@@ -44,7 +73,7 @@ void printBoard(int startWall, int HALF_NUM_COL, int gameBoard[NUM_BOARD_X][NUM_
 	
 	gameBoard[15][15] = WINNER;
     terminal_put(15,15,WIN_CHAR);
-
+*/
     /*
     Setting up the freeze powerups and health powerups
     */
@@ -52,7 +81,7 @@ void printBoard(int startWall, int HALF_NUM_COL, int gameBoard[NUM_BOARD_X][NUM_
     int num_of_freeze_powerups = 3; //we will have 3 freeze powerups
     int num_of_health_powerups = 3; //we will have 3 health powerups
     int powerup_row = 0, powerup_column = 0;
-    for (int powerup_index = 0; powerup_index < num_of_freeze_powerups; powerup_index++) //inserting freeze powerups
+    for(int powerup_index = 0; powerup_index < num_of_freeze_powerups; powerup_index++) //inserting freeze powerups
     {
         powerup_row = rand() % NUM_BOARD_X;
         powerup_column = rand() % NUM_BOARD_Y;

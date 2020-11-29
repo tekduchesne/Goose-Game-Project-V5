@@ -41,8 +41,8 @@ const int TELEPORTER_POWERUP = int('T');
 */
 
 // print the game board function protype
-void printBoard(int startWall, int HALF_NUM_COL, int gameBoard[NUM_BOARD_X][NUM_BOARD_Y]);
-
+//void printBoard(int startWall, int HALF_NUM_COL, int gameBoard[NUM_BOARD_X][NUM_BOARD_Y]);
+void printBoard(ifstream & fin, int gameBoard[NUM_BOARD_X][NUM_BOARD_Y]);
 /*
     Do something when the goose captures the player
     

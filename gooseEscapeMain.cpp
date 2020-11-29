@@ -5,6 +5,7 @@ START OF SOURCE FILE
 #include <cmath>
 #include <iostream>
 #include <time.h>
+#include <fstream>
 using namespace std;
 #include "gooseEscapeUtil.hpp"
 #include "gooseEscapeActors.hpp"
@@ -20,7 +21,8 @@ int main()
 	//Set up the window.
     terminal_open();
   	terminal_set(SETUP_MESSAGE);
-
+	
+	ifstream fin("map.txt");
 /*
     The code below provides a skeleton of the game play.  You will need to
     write code for setting up the game board, and playing the game itself.
@@ -49,7 +51,7 @@ int main()
     int startWall = 0, freezePowerupMoves = 20, numOfFreezedMoves = 0;
     int gooseBattleNum = 0, playerBattleNum = 0;
     startWall = ((rand() % 5) + 1);
-    printBoard(startWall, NUM_BOARD_X/2, gameBoard);
+    printBoard(fin, gameBoard);
 
 	// Printing the instructions
     out.writeLine("Escape the Goose! " + monster.get_location_string());
